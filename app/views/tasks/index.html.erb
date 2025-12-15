@@ -1,36 +1,38 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "My Tasks" %>
 
-<% content_for :title, "Tasks" %>
-
-<h1>Tasks</h1>
 <div class="p-5 mb-4 bg-light rounded-3 border">
   <div class="container-fluid py-5 text-center">
-    <h1 class="display-5 fw-bold">Welcome to Task Tracker!</h1>
+    <h1 class="display-5 fw-bold">Welcome, <%= current_user.email %>!</h1>
     <p class="col-md-12 fs-4">
-      You are currently on the <strong>Home Page</strong>. 
-      Use this space to organize your day. If you have nothing planned yet, start by creating a new note below.
+      You are on your <strong>Home Page</strong>. 
+      Use this space to organize your day.
     </p>
     <%= link_to "Create a New Note", new_task_path, class: "btn btn-primary btn-lg mt-3" %>
   </div>
-  </div> 
+</div> 
 
 <div id="tasks">
   <% if @tasks.any? %>
+    <h2 class="mb-4">Your Notes</h2>
     <% @tasks.each do |task| %>
-      <%= render task %>
-      <p>
-        <%= link_to "Show this task", task, class: "btn btn-sm btn-outline-secondary" %>
-      </p>
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+          <%= render task %>
+          <div class="mt-2">
+            <%= link_to "View Details", task, class: "btn btn-sm btn-outline-secondary" %>
+          </div>
+        </div>
+      </div>
     <% end %>
   <% else %>
-    <div class="alert alert-info mt-4" role="alert">
+    <div class="alert alert-info mt-4 text-center" role="alert">
       <h4 class="alert-heading">No tasks found!</h4>
-      <p>It looks like your task list is empty. Why not start by creating a new one?</p>
-      <hr>
-      <%= link_to "Create your first task", new_task_path, class: "btn btn-primary" %>
+      <p>It looks like your list is empty. Why not start by creating a new note?</p>
+      <%= link_to "Create your first task", new_task_path, class: "btn btn-primary mt-2" %>
     </div>
   <% end %>
 </div>
 
-<%= link_to "New task", new_task_path %>
-<%= paginate @tasks %>
+<div class="mt-4">
+  <%= paginate @tasks %>
+</div>
