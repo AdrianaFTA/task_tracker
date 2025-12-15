@@ -3,6 +3,16 @@
 <% content_for :title, "Tasks" %>
 
 <h1>Tasks</h1>
+<div class="p-5 mb-4 bg-light rounded-3 border">
+  <div class="container-fluid py-5 text-center">
+    <h1 class="display-5 fw-bold">Welcome to Task Tracker!</h1>
+    <p class="col-md-12 fs-4">
+      You are currently on the <strong>Home Page</strong>. 
+      Use this space to organize your day. If you have nothing planned yet, start by creating a new note below.
+    </p>
+    <%= link_to "Create a New Note", new_task_path, class: "btn btn-primary btn-lg mt-3" %>
+  </div>
+  </div> 
 
 <div id="tasks">
   <% if @tasks.any? %>
