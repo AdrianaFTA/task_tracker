@@ -20,7 +20,7 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.page(params[:page]).per[5]
+    @tasks = Task.page(params[:page]).per(5)
   end
 
   # POST /tasks or /tasks.json
