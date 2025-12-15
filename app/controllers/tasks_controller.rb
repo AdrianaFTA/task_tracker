@@ -19,6 +19,10 @@ class TasksController < ApplicationController
   def edit
   end
 
+  def index
+    @tasks = Task.page(params[:page]).per[5]
+  end
+
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
