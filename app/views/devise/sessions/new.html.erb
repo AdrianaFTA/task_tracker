@@ -1,0 +1,39 @@
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6 col-lg-4">
+    <div class="card shadow border-0">
+      <div class="card-body p-4">
+        <h2 class="text-center mb-4 fw-bold">Login</h2>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          
+          <%# 1. Added 'form-label' and 'form-control' for Bootstrap styling %>
+          <div class="mb-3">
+            <%= f.label :email, class: "form-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Enter your email" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password, class: "form-label" %>
+            <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "Enter your password" %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="mb-3 form-check">
+              <%= f.check_box :remember_me, class: "form-check-input" %>
+              <%= f.label :remember_me, class: "form-check-label" %>
+            </div>
+          <% end %>
+
+          <%# 2. Added a styled Primary Button %>
+          <div class="d-grid gap-2">
+            <%= f.submit "Log in", class: "btn btn-primary btn-lg" %>
+          </div>
+        <% end %>
+
+        <div class="mt-4 text-center small text-muted">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,12 +20,12 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = current_user.task.page(params[:page]).per(5)
+    @tasks = current_user.tasks.page(params[:page]).per(5)
   end
 
   # POST /tasks or /tasks.json
   def create
-    @task = current_user.task.new(task_params)
+    @task = current_user.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save
