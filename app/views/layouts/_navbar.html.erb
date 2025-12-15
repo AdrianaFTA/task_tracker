@@ -1,9 +1,35 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
   <div class="container">
-    <a class="navbar-brand" href="/">TaskTracker</a>
-    <div class="navbar-nav">
-      <%= link_to 'All Tasks', tasks_path, class: 'nav-link' %>
-      <%= link_to 'New Task', new_task_path, class: 'nav-link' %>
+    <%= link_to 'TaskTracker', root_path, class: 'navbar-brand fw-bold' %>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <%= link_to 'All Tasks', tasks_path, class: 'nav-link' %>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <span class="nav-link text-light me-3">Logged in as: <strong><%= current_user.email %></strong></span>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </nav>
