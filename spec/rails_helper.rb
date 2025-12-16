@@ -28,10 +28,7 @@ end
 
 
 RSpec.configure do |config|
-  # --- FACTORY BOT & DEVISE CONFIG ---
-  # Allows you to use create(:user) instead of FactoryBot.create(:user)
-  config.include FactoryBot::Syntax::Methods
-  
+
   # Provides sign_in user helper for request specs
   config.include Devise::Test::IntegrationHelpers, type: :request
   # -----------------------------------
@@ -49,3 +46,21 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+require 'capybara/rails'
+require 'selenium/webdriver'
+
+# Register a headless Chrome driver
+Capybara.register_driver :headless_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--headless')        # Run without GUI
+  options.add_argument('--disable-gpu')     # Needed in CI sometimes
+  options.add_argument('--no-sandbox')      # Required for GitHub Actions
+  options.add_argument('--window-size=1400,1400')
+  options.add_argument('--disable-dev-shm-usage') # Avoid /dev/shm errors in CI
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+# Use headless_chrome for JavaScript tests
+Capybara.javascript_driver = :headless_chrome
