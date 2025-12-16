@@ -6,6 +6,9 @@ ActiveSupport.on_load(:active_record) do
     require "solid_cache"
   end
 
+  Rails.application.config.active_record.database_configuration["cache"] = 
+    Rails.application.config.active_record.database_configuration["production"]
+
   # Connect the Solid Cache models to the primary production database connection
   SolidCache::Record.connects_to database: { writing: :production, reading: :production }
 end
