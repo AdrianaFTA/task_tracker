@@ -83,3 +83,7 @@ production:
   url: <%= ENV["DATABASE_URL"] %>
   adapter: postgresql
   encoding: unicode
+
+cache: 
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
