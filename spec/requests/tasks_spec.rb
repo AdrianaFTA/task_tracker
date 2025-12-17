@@ -13,7 +13,7 @@ RSpec.describe "Tasks", type: :request do
     let(:user) { create(:user) }
 
     before do
-      sign_in user 
+      sign_in user
     end
 
     it "succeeds and renders the index template" do
