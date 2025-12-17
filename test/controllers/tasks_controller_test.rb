@@ -1,65 +1,50 @@
 require "test_helper"
 
-class TasksController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_task, only: %i[ show edit update destroy ]
+class TasksControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
 
-  # GET /tasks
-  def index
-    @tasks = current_user.tasks
+  setup do
+    @user = users(:test_user)
+    sign_in @user
+    @task = tasks(:task_one)
   end
 
-  # GET /tasks/1
-  def show
+  test "should get index" do
+    get tasks_url
+    assert_response :success
   end
 
-  # GET /tasks/new
-  def new
-    @task = current_user.tasks.build
+  test "should get new" do
+    get new_task_url
+    assert_response :success
   end
 
-  # GET /tasks/1/edit
-  def edit
-  end
-
-  # POST /tasks
-  def create
-    @task = current_user.tasks.build(task_params)
-
-    if @task.save
-      redirect_to @task, notice: "Task was successfully created."
-    else
-      render :new, status: :unprocessable_entity
+  test "should create task" do
+    assert_difference("Task.count") do
+      post tasks_url, params: { task: { description: @task.description, due_date: @task.due_date, status: @task.status, title: @task.title } }
     end
+    assert_redirected_to task_url(Task.last)
   end
 
-  # PATCH/PUT /tasks/1
-  def update
-    if @task.update(task_params)
-      redirect_to @task, notice: "Task was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
-    end
+  test "should show task" do
+    get task_url(@task)
+    assert_response :success
   end
 
-  # DELETE /tasks/1
-  def destroy
-    @task.destroy
-    redirect_to tasks_url, notice: "Task was successfully destroyed."
+  test "should get edit" do
+    get edit_task_url(@task)
+    assert_response :success
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      # Using current_user.tasks ensures users can only access their own tasks
-      @task = current_user.tasks.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to tasks_path, alert: "Task not found."
-    end
+  test "should update task" do
+    patch task_url(@task), params: { task: { description: @task.description, due_date: @task.due_date, status: @task.status, title: @task.title } }
+    assert_redirected_to task_url(@task)
+  end
 
-    # Only allow a list of trusted parameters through.
-    # We fixed 'desription' to 'description' here!
-    def task_params
-      params.require(:task).permit(:title, :description, :due_date, :status)
+  test "should destroy task" do
+    assert_difference("Task.count", -1) do
+      delete task_url(@task)
     end
+    assert_redirected_to tasks_url
+  end
 end
