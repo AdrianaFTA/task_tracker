@@ -14,7 +14,7 @@ class TasksTest < ApplicationSystemTestCase
     visit tasks_url
     click_on "New task"
 
-    fill_in "Desription", with: @task.desription
+    fill_in "Description", with: @task.description
     fill_in "Due date", with: @task.due_date
     fill_in "Status", with: @task.status
     fill_in "Title", with: @task.title
@@ -28,7 +28,7 @@ class TasksTest < ApplicationSystemTestCase
     visit task_url(@task)
     click_on "Edit this task", match: :first
 
-    fill_in "Desription", with: @task.desription
+    fill_in "Description", with: @task.description
     fill_in "Due date", with: @task.due_date
     fill_in "Status", with: @task.status
     fill_in "Title", with: @task.title
