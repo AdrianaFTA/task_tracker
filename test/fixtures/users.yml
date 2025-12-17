@@ -1,5 +1,4 @@
 # This user will be used by our task records
 test_user:
   email: test@example.com
-
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>

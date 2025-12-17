@@ -1,13 +1,13 @@
-
-
-one:
-  title: MyString
-  description: MyText
+task_one:
+  title: "First task"
+  description: "test"
   due_date: 2025-12-15
-  status: test_user
+  status: "pending"
+  user: test_user
 
-two:
-  title: MyString
-  description: MyText
-  due_date: 2025-12-15
-  status: test_user
+task_two:
+  title: "Second task"
+  description: "test"
+  due_date: 2025-12-20
+  status: "pending"
+  user: test_user
