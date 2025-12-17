@@ -2,4 +2,4 @@
 test_user:
   email: test@example.com
 
-  password_digest: <%= Devise::Encryptor.digest(User, 'password123') %>
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>

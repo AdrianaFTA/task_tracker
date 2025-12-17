@@ -1,13 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
 
 one:
   title: MyString
-  desription: MyText
+  description: MyText
   due_date: 2025-12-15
-  status: MyString
+  status: test_user
 
 two:
   title: MyString
-  desription: MyText
+  description: MyText
   due_date: 2025-12-15
-  status: MyString
+  status: test_user
